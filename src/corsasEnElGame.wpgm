@@ -30,10 +30,6 @@ program corsasEnElGame {
 	keyboard.up().onPressDo({auto.activarMovimiento().moverArriba()})
 	keyboard.down().onPressDo({auto.activarMovimiento().moverAbajo()})
 	
-	// mostrar de Prueba: game.say(player, "Maiz Plantado: " +  player.cantidadDeMaiz())
-	//keyboard.a().onPressDo({game.say(corsaGame,corsaGame.mostrarPosicion())})
-	//keyboard.z().onPressDo({game.say(corsaGame,corsaGame.mostrarHistorialPosicion())})
-	
 	// cambio de color
 	keyboard.a().onPressDo( { auto.activo().cambiarColor(colores.azul()) } )
 	keyboard.v().onPressDo( { auto.activo().cambiarColor(colores.verde()) } )
