@@ -1,7 +1,43 @@
 import wollok.game.*
+import rodados.*
 
 program corsasEnElGame {
-	// hacer las inicializaciones necesarias 
+	//inicializaciones necesarias 
+	game.height(10)
+	game.width(10)
+	game.title("Corsa Game")
+	const corsaGame1 = new ChevroletCorsa(color = colores.rojo(), image = "autitorojo.png", position = game.center())
+	//corsaGame.color(colores.rojo())
+	//corsaGame.position(game.center())
+	const corsaGame2 = new ChevroletCorsa(color = colores.verde(), image = "autitoverde.png", position = game.center().left(1))
+	const corsaGame3 = new ChevroletCorsa(color = colores.azul(), image = "autitoazul.png", position = game.center().right(1))
+	game.addVisual(corsaGame1)
+	game.addVisual(corsaGame2)
+	game.addVisual(corsaGame3)
+	auto.agregarActivo(corsaGame1)
+	auto.agregarActivo(corsaGame2)
+	auto.agregarActivo(corsaGame3)
+	
+	// activacion de corsas
+	keyboard.num(1).onPressDo({ auto.activo(corsaGame1) })
+	keyboard.num(2).onPressDo({ auto.activo(corsaGame2) })
+	keyboard.num(3).onPressDo({ auto.activo(corsaGame3) })
+	keyboard.num(4).onPressDo({ auto.activo("todos") })
+	
+	// movimientos de teclado
+	keyboard.left().onPressDo({auto.activarMovimiento().moverALaIzquierda()})
+	keyboard.right().onPressDo({auto.activarMovimiento().moverALaDerecha()})
+	keyboard.up().onPressDo({auto.activarMovimiento().moverArriba()})
+	keyboard.down().onPressDo({auto.activarMovimiento().moverAbajo()})
+	
+	// mostrar de Prueba: game.say(player, "Maiz Plantado: " +  player.cantidadDeMaiz())
+	//keyboard.a().onPressDo({game.say(corsaGame,corsaGame.mostrarPosicion())})
+	//keyboard.z().onPressDo({game.say(corsaGame,corsaGame.mostrarHistorialPosicion())})
+	
+	// cambio de color
+	keyboard.a().onPressDo( { auto.activo().cambiarColor(colores.azul()) } )
+	keyboard.v().onPressDo( { auto.activo().cambiarColor(colores.verde()) } )
+	keyboard.r().onPressDo( { auto.activo().cambiarColor(colores.rojo()) } )
 	
 	game.start()
 }

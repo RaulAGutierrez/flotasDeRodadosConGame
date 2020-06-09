@@ -1,0 +1,67 @@
+import rodados.*
+import traffic.*
+import dependencia.*
+
+test "test2dependencias" {
+	// Definicion de dependencias
+	const deportes = new Dependencia()
+	deportes.setEmpleados(45)
+	const cultura = new Dependencia()
+	cultura.setEmpleados(31)
+	// Definicion de cachito
+	const cachito = new ChevroletCorsa()
+	cachito.color(colores.rojo())
+	
+	// Definicion flota deportes
+	const corsaAzul = new ChevroletCorsa()
+	corsaAzul.color(colores.azul())
+	const corsaVerde = new ChevroletCorsa()
+	corsaVerde.color(colores.verde())
+	const kwind0 = new RenaultKwind()
+	const autoEspecial = new AutosEspeciales()
+	autoEspecial.capacidad(5)
+	autoEspecial.velocidadMax(160)
+	autoEspecial.peso(1200)
+	autoEspecial.color(colores.beige())
+	deportes.agregarAFlota(cachito)
+	deportes.agregarAFlota(corsaAzul)
+	deportes.agregarAFlota(corsaVerde)
+	deportes.agregarAFlota(autoEspecial)
+	deportes.agregarAFlota(kwind0)
+	
+	// Definicion flota cultura
+	const kwind1 = new RenaultKwind()
+	const kwind2 = new RenaultKwind()
+	const kwind3SinTanque = new RenaultKwind()
+	kwind3SinTanque.noTieneGas()
+	const interiorPopular = new Interior()
+	interiorPopular.setCapacidad(12)
+	interiorPopular.setPeso(1000)
+	const motorBaraton = new Motor()
+	motorBaraton.setVelocidadMax(80)
+	motorBaraton.setPesoMotor(500)
+	trafic.setInterior(interiorPopular)
+	trafic.setMotor(motorBaraton)
+	cultura.agregarAFlota(kwind1)
+	cultura.agregarAFlota(kwind2)
+	cultura.agregarAFlota(kwind3SinTanque)
+	cultura.agregarAFlota(trafic)
+	cultura.agregarAFlota(cachito)
+	
+	// test
+	assert.equals(6450, deportes.pesoTotalFlota())
+	assert.equals(10700, cultura.pesoTotalFlota())
+	assert.that(deportes.estaBienEquipada())
+	assert.notThat(cultura.estaBienEquipada())
+	assert.equals(7, deportes.capacidadTotalEnColor(colores.azul()))
+	assert.equals(10, cultura.capacidadTotalEnColor(colores.azul()))
+	assert.equals(colores.beige(), deportes.colorDelRodadoMasRapido())
+	assert.equals(colores.rojo(), cultura.colorDelRodadoMasRapido())
+	assert.that(deportes.esGrande())
+	assert.notThat(cultura.esGrande())
+	assert.equals(25, deportes.capacidadFaltante())
+	assert.equals(5, cultura.capacidadFaltante())
+	
+	//assert.that(true)
+
+}
