@@ -34,8 +34,9 @@ class ChevroletCorsa {
 	method mostrarPosicion() { return self.position() }
 	method mostrarHistorialPosicion() { return self.historialPosiciones() }
 	method moverALaIzquierda() {
+		historialPosiciones.add(self.position())
 		self.position(self.position().left(1))
-		historialPosiciones.add(self.position())	
+			
 	}
 	method moverALaDerecha() {
 		self.position(self.position().right(1))

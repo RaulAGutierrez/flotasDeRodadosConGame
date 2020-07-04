@@ -14,26 +14,38 @@ program corsasEnElGame {
 	game.addVisual(corsaGame1)
 	game.addVisual(corsaGame2)
 	game.addVisual(corsaGame3)
-	auto.agregarActivo(corsaGame1)
-	auto.agregarActivo(corsaGame2)
-	auto.agregarActivo(corsaGame3)
+	//auto.agregarActivo(corsaGame1)
+	//auto.agregarActivo(corsaGame2)
+	//auto.agregarActivo(corsaGame3)
+	var autosActivos = [corsaGame1]
 	
 	// activacion de corsas
-	keyboard.num(1).onPressDo({ auto.activo(corsaGame1) })
-	keyboard.num(2).onPressDo({ auto.activo(corsaGame2) })
-	keyboard.num(3).onPressDo({ auto.activo(corsaGame3) })
-	keyboard.num(4).onPressDo({ auto.activo("todos") })
+	keyboard.num(1).onPressDo({ autosActivos.clear()
+		autosActivos.add(corsaGame1)})
+	keyboard.num(2).onPressDo({ autosActivos.clear()
+		autosActivos.add(corsaGame2) })
+	keyboard.num(3).onPressDo({ autosActivos.clear()
+		autosActivos.add(corsaGame3) })
+	keyboard.num(4).onPressDo({ autosActivos.clear()
+		autosActivos = [corsaGame1,corsaGame2,corsaGame3]})
 	
 	// movimientos de teclado
-	keyboard.left().onPressDo({auto.activarMovimiento().moverALaIzquierda()})
-	keyboard.right().onPressDo({auto.activarMovimiento().moverALaDerecha()})
-	keyboard.up().onPressDo({auto.activarMovimiento().moverArriba()})
-	keyboard.down().onPressDo({auto.activarMovimiento().moverAbajo()})
+	keyboard.left().onPressDo({autosActivos.forEach({auto => auto.moverALaIzquierda()}) })
+	keyboard.right().onPressDo({autosActivos.forEach({auto => auto.moverALaDerecha()} )} )
+	keyboard.up().onPressDo({autosActivos.forEach({auto => auto.moverArriba()}) } )
+	keyboard.down().onPressDo({autosActivos.forEach({auto => auto.moverAbajo()}) } )
 	
 	// cambio de color
-	keyboard.a().onPressDo( { auto.activo().cambiarColor(colores.azul()) } )
-	keyboard.v().onPressDo( { auto.activo().cambiarColor(colores.verde()) } )
-	keyboard.r().onPressDo( { auto.activo().cambiarColor(colores.rojo()) } )
+	keyboard.a().onPressDo( { autosActivos.forEach({auto => auto.cambiarColor(colores.azul()) } ) })
+	keyboard.v().onPressDo( { autosActivos.forEach({auto => auto.cambiarColor(colores.verde()) } ) } )
+	keyboard.r().onPressDo( { autosActivos.forEach({auto => auto.cambiarColor(colores.rojo()) } ) } )
 	
+	keyboard.i().onPressDo({ 
+		game.say(corsaGame1, "ya estuve en esta posicion?:  " +  corsaGame1.pasoPor(corsaGame1.position()))
+	}
+	
+	)
 	game.start()
+	
+	
 }
